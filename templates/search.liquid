@@ -1,68 +1,38 @@
-{% paginate search.results by 10 %}
- <section class="h-[80vh] flex-col flex gap-12 justify-center items-center px-12">
-	<div class="flex items-center justify-center">
-		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
-		<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
-		<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
-		  </form>
-	  </div>
+<section>
+	<form action="/search" method="get">
+  <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search" id="search-input">
+  <button type="submit">Search</button>
+</form>
 
-	  	<div class="search-results">
-			{% for item in search.results %}
-				{% if item.featured_image %}
-				  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-					{{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-				  </a>
-				{% endif %}
-				<h5>{{ item.title | link_to: item.url }}</h5>
-				<p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-			  {% else %}
-				no results
-			{% endfor %}
-		</div>
-	
-	  <div class="flex items-center justify-center gap-12">
-		{% if search.performed %}
-			{% for item in search.results %}
-			  {% if item.featured_image %}
-				<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-				  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-				</a>
-			  {% endif %}
-			  <h5>{{ item.title | link_to: item.url }}</h5>
-			  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-			{% else %}
-			  no results
-			{% endfor %}
-		  {% endif %}
-	  </div>
- </section>
-  
-
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
+<ul class="search-results">
+  {% for item in search.results %}
+    <li>
+      <a href="{{ item.url }}">
+        {{ item.title | escape }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+</section>
 
 <style>
-	.btn {
-		border: 2px solid gray;
-	}
+	/* Initially hide the search results */
+.search-results {
+  display: none;
+}
 
-	.search-results {
-	  display: none;
-	}
+/* Display search results when the input field is focused */
+#search-input:focus + .search-results {
+  display: block;
+}
 
-	/* Display search results when the input field is focused */
-	#search-input:focus + .search-results {
-	  display: block;
-	  background-color: red;
-	  width: 500px;
-	}
 </style>
 
 
 <script>
 	document.getElementById('search-input').addEventListener('blur', function() {
-	  // Hide search results when the input field loses focus
-	  document.querySelector('.search-results').style.display = 'none';
-	});
+  // Hide search results when the input field loses focus
+  document.querySelector('.search-results').style.display = 'none';
+});
+
 </script>
