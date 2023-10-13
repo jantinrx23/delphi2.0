@@ -1,7 +1,7 @@
 {% paginate search.results by 10 %}
  <section class="h-[80vh] flex-col flex gap-12 justify-center items-center px-12">
 	<div class="flex items-center justify-center relative">
-		{% comment %} <form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
+		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
 			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
 			<ul class="search-results" id="search-results">
 		      {% for item in search.results %}
@@ -13,7 +13,7 @@
 		      {% endfor %}
 		    </ul>
 			<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
-		</form> {% endcomment %}
+		</form>
 
 		  <div class="bg-blue-400">
 			<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
@@ -21,19 +21,9 @@
 			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
 			
 			<div id="myDropdown" class="dropdown-container">
-				{% if search.performed %}
-					{% for item in search.results %}
-					  {% if item.featured_image %}
-						<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-						  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-						</a>
-					  {% endif %}
-					  <h5>{{ item.title | link_to: item.url }}</h5>
-					  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-					{% else %}
-					  no results
-					{% endfor %}
-				  {% endif %}
+			  <a href="#" class="dropdown-option">Option 1</a>
+			  <a href="#" class="dropdown-option">Option 2</a>
+			  <a href="#" class="dropdown-option">Option 3</a>
 			</div>
 
 			</form>
