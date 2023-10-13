@@ -1,7 +1,7 @@
 {% paginate search.results by 10 %}
   <section class="h-[100vh] flex items-center justify-center">
-	<form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
+	<form action="/search" method="get" role="search" class="flex">
+    <input type="search" name="q" class="py-10 border-gray-400" value="{{ search.terms | escape }}">
     <button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
   	</form>
   </section>
