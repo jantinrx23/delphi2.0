@@ -3,9 +3,9 @@
 	<div class="flex items-center justify-center relative">
 		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
 		<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
-		<div class="search-results absolute top-[5%]">
-			<p>test</p>
-			{% comment %} {% for item in search.results %}
+		<div class="search-results absolute top-[12%]">
+			
+			 {% for item in search.results %}
 				{% if item.featured_image %}
 				  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
 					{{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
@@ -15,7 +15,7 @@
 				<p>{{ item.content | strip_html | truncatewords: 50 }}</p>
 			  {% else %}
 				no results
-			{% endfor %} {% endcomment %}
+			{% endfor %} 
 		</div>
 		<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
 		  </form>
