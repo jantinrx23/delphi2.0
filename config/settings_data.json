@@ -1,1 +1,62 @@
-{"current":{"sections":{"footer":{"type":"footer","settings":{"title":"Footer Description"}},"1641222068a6deb08d":{"type":"hero","settings":{"image":"shopify:\/\/shop_images\/Elegance_and_innovation.png"}},"9c931490-a2ae-405e-9981-cc4e31ce455b":{"type":"image-with-text","settings":{"title":"Image with Text","text":"<p>Write your description here<\/p>","reverse":false}}},"content_for_index":["1641222068a6deb08d","9c931490-a2ae-405e-9981-cc4e31ce455b"]},"presets":{"Default":{}}}
+{
+  "current": {
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "74ea99b1-272f-4c1e-b691-c84da30c714e": {
+            "type": "social_link",
+            "settings": {
+              "title": "Facebook",
+              "link": ""
+            }
+          },
+          "7a18b884-7176-416e-b195-82a6cb7e5823": {
+            "type": "social_link",
+            "settings": {
+              "title": "Twitter",
+              "link": ""
+            }
+          },
+          "8347a40d-0818-433f-b67e-0594404b112d": {
+            "type": "social_link",
+            "settings": {
+              "title": "Instagram",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "74ea99b1-272f-4c1e-b691-c84da30c714e",
+          "7a18b884-7176-416e-b195-82a6cb7e5823",
+          "8347a40d-0818-433f-b67e-0594404b112d"
+        ],
+        "settings": {
+          "title": "Footer Description"
+        }
+      },
+      "1641222068a6deb08d": {
+        "type": "hero",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Elegance_and_innovation.png"
+        }
+      },
+      "9c931490-a2ae-405e-9981-cc4e31ce455b": {
+        "type": "image-with-text",
+        "settings": {
+          "title": "Image with Text",
+          "text": "<p>Write your description here<\/p>",
+          "reverse": false
+        }
+      }
+    },
+    "content_for_index": [
+      "1641222068a6deb08d",
+      "9c931490-a2ae-405e-9981-cc4e31ce455b"
+    ]
+  },
+  "presets": {
+    "Default": {
+    }
+  }
+}
