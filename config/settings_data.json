@@ -17,11 +17,19 @@
               "title": "Twitter",
               "link": ""
             }
+          },
+          "8347a40d-0818-433f-b67e-0594404b112d": {
+            "type": "social_link",
+            "settings": {
+              "title": "Instagram",
+              "link": ""
+            }
           }
         },
         "block_order": [
           "74ea99b1-272f-4c1e-b691-c84da30c714e",
-          "7a18b884-7176-416e-b195-82a6cb7e5823"
+          "7a18b884-7176-416e-b195-82a6cb7e5823",
+          "8347a40d-0818-433f-b67e-0594404b112d"
         ],
         "settings": {
           "title": "Footer Description"
