@@ -34,15 +34,13 @@
 		  {% endif %}
 	  </div>
 
-		  <div class="bg-red-400">
-			<input class="btn" type="text" id="myInput" onfocus="showDropdown()">
-
-				<!-- The dropdown container -->
-				<div class="dropdown-container" id="myDropdown">
-				  <a href="#" class="dropdown-option">Option 1</a>
-				  <a href="#" class="dropdown-option">Option 2</a>
-				  <a href="#" class="dropdown-option">Option 3</a>
-				</div>
+		  <div class="bg-blue-400">
+			<input type="text" id="myInput" onfocus="showDropdown()">
+			<div id="myDropdown" class="dropdown-container">
+			  <a href="#" class="dropdown-option">Option 1</a>
+			  <a href="#" class="dropdown-option">Option 2</a>
+			  <a href="#" class="dropdown-option">Option 3</a>
+			</div>
 		  </div>
 	  
  </section>
@@ -76,8 +74,7 @@
 	}
 
 
-	 /* Styling for the dropdown container */
-	 .dropdown-container {
+	.dropdown-container {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -114,16 +111,13 @@
   var dropdown = document.getElementById("myDropdown");
 
   // Toggle the display of the dropdown on focus
-  if (dropdown.style.display === "block") {
-    dropdown.style.display = "none";
-  } else {
-    dropdown.style.display = "block";
-  }
-}
+  dropdown.style.display = "block";
 
-document.addEventListener('click', function(event) {
+  // Add a click event listener to the document
+  document.addEventListener('click', function(event) {
     if (!event.target.matches('#myInput') && !event.target.matches('.dropdown-option')) {
       dropdown.style.display = "none";
     }
   });
+}
 </script>
