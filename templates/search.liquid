@@ -1,24 +1,29 @@
 {% paginate search.results by 10 %}
-  <section class="h-[100vh] flex items-center justify-center">
-	<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
-    <input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}">
-    <button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
-  	</form>
-  </section>
-
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
+ <section class="h-[80vh] flex justify-center items-center">
+	<div class="flex items-center justify-center">
+		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
+		<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}">
+		<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
+		  </form>
+	  </div>
+	
+	  <div class="flex items-center justify-center">
+		{% if search.performed %}
+			{% for item in search.results %}
+			  {% if item.featured_image %}
+				<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+				  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+				</a>
+			  {% endif %}
+			  <h5>{{ item.title | link_to: item.url }}</h5>
+			  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+			{% else %}
+			  no results
+			{% endfor %}
+		  {% endif %}
+	  </div>
+ </section>
+  
 
   {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
 {% endpaginate %}
