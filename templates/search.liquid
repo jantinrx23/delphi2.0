@@ -1,6 +1,6 @@
 {% paginate search.results by 10 %}
  <section class="h-[80vh] flex-col flex gap-12 justify-center items-center px-12">
-	<div class="flex items-center justify-center relative">
+	<div class="flex flex-col items-center justify-center relative">
 		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
 			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
 			<ul class="search-results" id="search-results">
