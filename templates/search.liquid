@@ -3,7 +3,7 @@
 	<div class="flex items-center justify-center relative">
 		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
 		<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
-		<div class="search-results absolute top-[-10%]">
+		<div class="search-results absolute bottom-10%]">
 			
 			 {% for item in search.results %}
 				{% if item.featured_image %}
