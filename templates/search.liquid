@@ -21,9 +21,19 @@
 			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
 			
 			<div id="myDropdown" class="dropdown-container">
-			  <a href="#" class="dropdown-option">Option 1</a>
-			  <a href="#" class="dropdown-option">Option 2</a>
-			  <a href="#" class="dropdown-option">Option 3</a>
+				{% if search.performed %}
+					{% for item in search.results %}
+					  {% if item.featured_image %}
+						<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+						  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+						</a>
+					  {% endif %}
+					  <h5>{{ item.title | link_to: item.url }}</h5>
+					  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+					{% else %}
+					  no results
+					{% endfor %}
+				  {% endif %}
 			</div>
 
 		
