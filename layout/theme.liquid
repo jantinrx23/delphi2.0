@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <title>{{ page_title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  {{ content_for_header }} <!-- Header hook for plugins -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  {% comment %} JQUERY {% endcomment %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  {% comment %} slick slider {% endcomment %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  
+
+
+  <!-- VUE & AXIOS CONNECTION -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@3.0.5"></script>
+  <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.prod.js"></script><script src="https://unpkg.com/vue@next"></script>
+
+  
+  {{ 'application.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'application.js' | asset_url | script_tag }}
+  
+  
+</head>
+<body>
+
+  {% render 'header' %}
+
+  	
+  	{% comment %} {% if template == 'index' or page.handle contains '6-reasons' %}
+  		
+  				<link rel="stylesheet" href="{{ 'kahani.css' | asset_url  }}" media="print" onload="this.media='all'">
+  			 	<link href="https://cdn.prd.kahaniapp.com/poophoria/kahani.css" rel="stylesheet">
+        		<div id="kahani_container" data-story-url="https://cdn.prd.kahaniapp.com/poophoria/stories.json"></div>
+        		<script src="https://cdn.prd.kahaniapp.com/poophoria/kahani.js"></script>
+  
+  	
+   	{% elsif page.handle == 'kahani-test' %}
+  			
+  			 	<link href="https://cdn.prd.kahaniapp.com/poophoria/kahani.css" rel="stylesheet">
+        		<div id="kahani_container" data-story-url="https://cdn.prd.kahaniapp.com/poophoria/stories.json"></div>
+        		<script src="https://cdn.prd.kahaniapp.com/poophoria/kahani.js"></script>
+  
+  	{% endif %} {% endcomment %}
+  
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <!-- test -->
+
+</body>
+</html>

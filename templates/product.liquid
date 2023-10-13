@@ -1,0 +1,238 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+
+<section class="flex flex-col md:flex-row items-start justify-center px-8 py-8 mt-[12vh]">
+	  	<div class="flex flex-col justify-start w-full md:w-[60%]">
+			{% comment %} <div class="product-images">
+		    <div class="swiper-container-product-page swiper-container-{{- product.id -}}">
+		      <div class="swiper-wrapper">
+		        {% for image in product.images %}
+		          <div class="swiper-slide">
+		            <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" />
+		            <div class="swiper-button-next swiper-button-next-{{- product.id -}}"></div>
+		            <div class="swiper-button-prev swiper-button-prev-{{- product.id -}}"></div>
+		          </div>
+		        {% endfor %}
+				
+		      </div>
+		    </div>
+		  	</div>
+
+		  	<div class="flex">
+				{% for image in product.images %}
+					<img src="{{ image.src | product_img_url: 'medium' }}" alt="{{ product.title }} - {{ image.alt }}" />
+			  	{% endfor %}
+			</div> {% endcomment %}
+
+			<div class="main flex flex-col gap-[25px]">
+				<div class="slider slider-for">
+					{% for image in product.images %}
+						<div><img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" /></div>
+				  	{% endfor %} 
+				</div>
+				<div class="slider mt-[2vh] slider-nav flex flex-col relative">
+						  {% comment %} <div class="absolute top-[-20%]">
+							<div class=" relative">
+							</div>
+						  </div> {% endcomment %}
+				  
+					  {% for image in product.images %}
+						<div class="bg-green-200 slide-menus"><img src="{{ image.src | img_url: 'master' }} data-slide={{- product.id -}}" alt="{{ image.alt | escape }}" /></div>
+					  {% endfor %} 
+				</div>
+
+		
+			</div>
+				
+		</div>
+
+  		<div class="flex flex-col justify-start items-center px-7 w-full md:w-[40%]">
+    
+		    <div class="product-title">
+		      <h1>{{ product.title }}</h1>
+		    </div>
+
+		    <div class="product-bottom">
+		      <div class="product-description">
+		        {{ product.description }}
+		      </div>
+		      {% render 'add-to-cart-form' %}
+		    </div>
+
+  		</div>
+</section>
+
+
+
+
+<script>
+
+$('.slider-for').slick({
+   slidesToShow: 1,
+   slidesToScroll: 1,
+   prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+   nextArrow: '<button class="slide-arrow next-arrow"></button>',
+   fade: true,
+   asNavFor: '.slider-nav'
+ });
+ $('.slider-nav').slick({
+   slidesToShow: 4,
+   slidesToScroll: 1,
+   asNavFor: '.slider-for',
+   dots: true,
+   focusOnSelect: true
+ });
+
+ $('a[data-slide]').click(function(e) {
+   e.preventDefault();
+   var slideno = $(this).data('slide');
+   $('.slider-nav').slick('slickGoTo', slideno - 1);
+ });
+	
+
+</script>
+
+{% if product.images.size <= 3 %}
+		<style>
+			.slick-dots {
+				display: none !important;
+			}
+
+			.slick-track{
+				transform: none !important;
+			}
+		</style>
+
+  		{% else %}
+{% endif %}
+
+<style>
+	.slick-slider {
+		position: relative;
+		
+	}
+
+	.slick-prev, .slick-next  {
+		display: none;
+	}
+
+	 .slick-current img {
+		border: 2px solid gray !important;
+	}
+	
+	.main {
+	  width:500px;
+	  display:block;
+	  margin:0 auto;
+	}
+	h3 {
+	    background: #fff;
+	    color: #3498db;
+	    font-size: 36px;
+	    line-height: 100px;
+	    margin: 10px;
+	    padding: 2%;
+	    position: relative;
+	    text-align: center;
+	}
+	.action{
+	  display:block;
+	  margin:100px auto;
+	  width:100%;
+	  text-align:center;
+	}
+	.action a {
+	  display:inline-block;
+	  padding:5px 10px; 
+	  background:#f30;
+	  color:#fff;
+	  text-decoration:none;
+	}
+	.action a:hover{
+	  background:#000;
+	}
+
+	/* slider dots */
+	.slick-dots {
+	 display: flex;
+	 justify-content: center;
+	 margin: 0;
+	 padding: 1rem 0;
+	 list-style-type: none;
+	}
+	 .slick-dots li {
+		 margin: 0 0.25rem;
+	}
+	 .slick-dots button {
+		 display: block;
+		 width: 10px;
+		 height: 10px;
+		 padding: 0;
+		 border: none;
+		 border-radius: 100%;
+		 text-indent: -9999px;
+	}
+	 .slick-dots li.slick-active button {
+		 background-color: black;
+	}
+	 
+	.slick-dots li button {
+		background: gray;
+	}
+
+
+
+	.slide-arrow{
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+}
+.prev-arrow{
+  left: -40px;
+  width: 0;
+  height: 0;
+  border-left: 0 solid transparent;
+  border-right: 15px solid black;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.next-arrow{
+  right: -40px;
+  width: 0;
+  height: 0;
+  border-right: 0 solid transparent;
+  border-left: 15px solid black;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+</style>
+
+
+{% comment %}
+<script>
+	 new Swiper(".swiper-container-{{- product.id -}}", {
+    slidesPerView: 1,
+    centeredSlides: true,
+    spaceBetween: 0,
+    loop: true,
+
+    breakpoints: {
+      600: {
+        allowTouchMove: false,
+        speed: 0,
+        navigation: {
+          nextEl: ".swiper-button-next-{{- product.id -}}",
+          prevEl: ".swiper-button-prev-{{- product.id -}}"
+        }
+      }
+    }
+  })
+</script>
+{% endcomment %}
+
+
+
+
+
+

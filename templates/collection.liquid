@@ -1,0 +1,19 @@
+{% comment %}
+<div class="container">
+  <div class="collection">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    <div class="collection-list flex space-between">
+      {% render 'product-card' for collection.products as product %}
+    </div>
+  </div>
+</div>
+{% endcomment %}
+
+<div class="container">
+  <div class="collection">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    <div class="collection-list">
+        {% render 'product-card' for collection.products as product %}
+    </div>
+  </div>
+</div>
