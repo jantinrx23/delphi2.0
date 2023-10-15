@@ -41,7 +41,15 @@
 			  </div> {% endcomment %}
 
 			  <input type="text" id="search-input" placeholder="Type to search...">
-			  <div id="search-results"></div>
+				<div id="search-results">
+				  {% if search_results %}
+				    <ul>
+				      {% for product in search_results %}
+				        <li>{{ product.title }}</li>
+				      {% endfor %}
+				    </ul>
+				  {% endif %}
+				</div>
 
 	 </div>	
 	
@@ -139,28 +147,28 @@
 {% endcomment %}
 
 <script>
-  document.getElementById('search-input').addEventListener('focus', function () {
-    document.getElementById('search-results').style.display = 'block';
-  });
+	document.getElementById('search-input').addEventListener('focus', function () {
+	  document.getElementById('search-results').style.display = 'block';
+	});
 
-  document.getElementById('search-input').addEventListener('blur', function () {
-    document.getElementById('search-results').style.display = 'none';
-  });
+	document.getElementById('search-input').addEventListener('blur', function () {
+	  document.getElementById('search-results').style.display = 'none';
+	});
 
-  document.getElementById('search-input').addEventListener('input', function () {
-    const searchTerm = this.value.trim().toLowerCase();
-    const searchResults = document.getElementById('search-results');
+	document.getElementById('search-input').addEventListener('input', function () {
+	  const searchTerm = this.value.trim().toLowerCase();
+	  const searchResults = document.getElementById('search-results');
 
-    // Make an AJAX request to fetch Liquid code
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '/search?view=ajax_search_results&term=' + searchTerm, true); // Modify the URL as needed
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        searchResults.innerHTML = xhr.responseText;
-      }
-    };
-    xhr.send();
-  });
+	  // Make an AJAX request to fetch Liquid code
+	  $.ajax({
+	    type: 'GET',
+	    url: '/search?view=ajax_search_results&term=' + searchTerm, // Modify the URL to match your Shopify theme's Liquid endpoint
+	    success: function (data) {
+	      searchResults.innerHTML = data;
+	    }
+	  });
+	});
+
 </script>
 
 
