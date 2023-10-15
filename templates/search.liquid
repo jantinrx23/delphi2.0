@@ -12,18 +12,18 @@
 		        </li>
 		      {% endfor %}
 		    </ul> {% endcomment %}
-				{% comment %} <input type="search" name="q" class="py-2.5 btn " value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
+			<input type="search" name="q" class="py-2.5 btn " value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
 			  <div id="myDropdown" class="dropdown-container top-[100%] left-[0%]">
 				<a href="#" class="dropdown-option">Option 1</a>
 				<a href="#" class="dropdown-option">Option 2</a>
 				<a href="#" class="dropdown-option">Option 3</a>
-			  </div> {% endcomment %}
+			  </div>
 
-			  	<input type="text" class="py-2.5 btn " id="myInput" oninput="searchShopifyProducts()">
+			  {% comment %} <input type="text" class="py-2.5 btn " id="myInput" oninput="searchShopifyProducts()">
 				<div id="myDropdown" class="dropdown-container">
 				  <div id="searchResults"></div>
-				</div>
-				<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
+				</div> {% endcomment %}
+			<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
 		</form>
 
 		  {% comment %} <div class="bg-red-400">	
