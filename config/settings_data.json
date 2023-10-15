@@ -44,8 +44,9 @@
       "9c931490-a2ae-405e-9981-cc4e31ce455b": {
         "type": "image-with-text",
         "settings": {
-          "title": "Image with Text",
-          "text": "<p>Write your description here<\/p>",
+          "image": "shopify:\/\/shop_images\/Hero_Image.png",
+          "title": "Lorem Ipsum",
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam<\/p>",
           "reverse": false
         }
       }
