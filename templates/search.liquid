@@ -1,46 +1,49 @@
 {% paginate search.results by 10 %}
  <section class="h-[80vh] flex-col flex gap-12 justify-center items-center px-12">
 	<div class="flex flex-col items-center justify-center relative">
-		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
-			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
-			<ul class="search-results" id="search-results">
-		      {% for item in search.results %}
-		        <li>
-		          <a href="{{ item.url }}">
-		            {{ item.title | escape }}
-		          </a>
-		        </li>
-		      {% endfor %}
-		    </ul>
-			<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
-		</form>
 
-		  <div class="bg-red-400">
-			
-			{% comment %} <input type="text" id="myInput" onfocus="showDropdown()"> {% endcomment %}
-			<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
-			
-			<div id="myDropdown" class="dropdown-container">
-				{% if search.performed %}
-					{% for item in search.results %}
-					  {% if item.featured_image %}
-						<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-						  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-						</a>
+			<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
+				<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
+				<ul class="search-results" id="search-results">
+			      {% for item in search.results %}
+			        <li>
+			          <a href="{{ item.url }}">
+			            {{ item.title | escape }}
+			          </a>
+			        </li>
+			      {% endfor %}
+			    </ul>
+				<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
+			</form>
+
+			  {% comment %} <div class="bg-red-400">
+				
+				{% comment %} <input type="text" id="myInput" onfocus="showDropdown()"> {% endcomment %}
+				<input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
+				
+				<div id="myDropdown" class="dropdown-container">
+					{% if search.performed %}
+						{% for item in search.results %}
+						  {% if item.featured_image %}
+							<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+							  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+							</a>
+						  {% endif %}
+						  <h5>{{ item.title | link_to: item.url }}</h5>
+						  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+						{% else %}
+						  no results
+						{% endfor %}
 					  {% endif %}
-					  <h5>{{ item.title | link_to: item.url }}</h5>
-					  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-					{% else %}
-					  no results
-					{% endfor %}
-				  {% endif %}
-			</div>
+				</div>
 
-		
-		  </div>
-	 </div>
+			
+			  </div> {% endcomment %}
 
-	  	
+			  <input type="text" id="search-input" placeholder="Type to search...">
+			  <div id="search-results"></div>
+
+	 </div>	
 	
 	  <div class="flex items-center justify-center gap-12">
 		{% if search.performed %}
@@ -66,7 +69,25 @@
   {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
 {% endpaginate %}
 
+
 <style>
+	 #search-input {
+    width: 200px;
+    padding: 10px;
+  }
+
+  #search-results {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+</style>
+
+{% comment %}
+	<style>
 	.btn {
 		border: 2px solid gray;
 	}
@@ -115,9 +136,35 @@
     box-sizing: border-box;
   }
 </style>
-
+{% endcomment %}
 
 <script>
+  document.getElementById('search-input').addEventListener('focus', function () {
+    document.getElementById('search-results').style.display = 'block';
+  });
+
+  document.getElementById('search-input').addEventListener('blur', function () {
+    document.getElementById('search-results').style.display = 'none';
+  });
+
+  document.getElementById('search-input').addEventListener('input', function () {
+    const searchTerm = this.value.trim().toLowerCase();
+    const searchResults = document.getElementById('search-results');
+
+    // Make an AJAX request to fetch Liquid code
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/search?view=ajax_search_results&term=' + searchTerm, true); // Modify the URL as needed
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        searchResults.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send();
+  });
+</script>
+
+
+{% comment %} <script>
 	document.getElementById('search-input').addEventListener('blur', function() {
 	  // Hide search results when the input field loses focus
 	  document.getElementById('search-results').style.display = 'none';
@@ -137,4 +184,4 @@
     }
   });
 }
-</script>
+</script> {% endcomment %}
