@@ -1,94 +1,14 @@
-{% paginate search.results by 10 %}
- <section class="h-[80vh] flex-col flex gap-12 justify-center items-center px-12">
-	<div class="flex flex-col items-center justify-center relative">
-		<form action="/search" method="get" role="search" class="flex justify-center items-center gap-2">
-			{% comment %} <input type="search" name="q" class="py-2.5 btn" value="{{ search.terms | escape }}" id="search-input">
-			<ul class="search-results" id="search-results">
-		      {% for item in search.results %}
-		        <li>
-		          <a href="{{ item.url }}">
-		            {{ item.title | escape }}
-		          </a>
-		        </li>
-		      {% endfor %}
-		    </ul> {% endcomment %}
-			<input type="search" name="q" class="py-2.5 btn " value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
-			  <div id="myDropdown" class="dropdown-container top-[100%] left-[0%]">
-				<a href="#" class="dropdown-option">Option 1</a>
-				<a href="#" class="dropdown-option">Option 2</a>
-				<a href="#" class="dropdown-option">Option 3</a>
-			  </div>
+<div>
+	<input type="text" id="myInput" oninput="searchShopifyProducts()">
+	<div id="myDropdown" class="dropdown-container">
+	  <div id="searchResults"></div>
+	</div>
+</div>
 
-			  {% comment %} <input type="text" class="py-2.5 btn " id="myInput" oninput="searchShopifyProducts()">
-				<div id="myDropdown" class="dropdown-container">
-				  <div id="searchResults"></div>
-				</div> {% endcomment %}
-			<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
-		</form>
-
-		  {% comment %} <div class="bg-red-400">	
-			  <input type="text" id="myInput" onfocus="showDropdown()">
-			  <div id="myDropdown" class="dropdown-container">
-				<a href="#" class="dropdown-option">Option 1</a>
-				<a href="#" class="dropdown-option">Option 2</a>
-				<a href="#" class="dropdown-option">Option 3</a>
-			  </div>
-		  </div> {% endcomment %}
-
-	 </div>
-
-	  	
-	
-	  <div class="flex items-center justify-center gap-12">
-		{% if search.performed %}
-			{% for item in search.results %}
-			  {% if item.featured_image %}
-				<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-				  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-				</a>
-			  {% endif %}
-			  <h5>{{ item.title | link_to: item.url }}</h5>
-			  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-			{% else %}
-			  no results
-			{% endfor %}
-		  {% endif %}
-	  </div>
-
-		  
-	  
- </section>
-  
-
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
 
 <style>
-	.btn {
-		border: 2px solid gray;
-	}
-
-	.search-results {
-	  display: none;
-	  position: absolute;
-	  background: #fff;
-	  border: 1px solid #ccc;
-	  max-height: 200px;
-	  overflow-y: auto;
-	}
-
-	/* Style the list items within the search results dropdown */
-	.search-results li {
-	  padding: 5px;
-	}
-
-	/* Display search results when the input field is focused */
-	#search-input:focus + .search-container .search-results {
-	  display: block;
-	}
-
-
-	.dropdown-container {
+  /* Styling for the dropdown container */
+  .dropdown-container {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -114,66 +34,45 @@
 </style>
 
 
+
 <script>
-	document.getElementById('search-input').addEventListener('blur', function() {
-	  // Hide search results when the input field loses focus
-	  document.getElementById('search-results').style.display = 'none';
-	});
-
-	function showDropdown() {
-	  // Get the dropdown container element
-	  var dropdown = document.getElementById("myDropdown");
-
-	  // Toggle the display of the dropdown on focus
-	  dropdown.style.display = "block";
-
-	  // Add a click event listener to the document
-	  document.addEventListener('click', function(event) {
-	    if (!event.target.matches('#myInput') && !event.target.matches('.dropdown-option')) {
-	      dropdown.style.display = "none";
-	    }
-	 });
-	}
-
-
 	function searchShopifyProducts() {
-  const input = document.getElementById("myInput");
-  const searchResults = document.getElementById("searchResults");
-  const query = input.value;
+	  const input = document.getElementById("myInput");
+	  const searchResults = document.getElementById("searchResults");
+	  const query = input.value;
 
-  // Replace 'your-shop.myshopify.com' with your Shopify store's URL and use your access token
-  const shopifyURL = 'https://my-vue-js-theme.myshopify.com/api/products?q=' + query;
-  
-  fetch(shopifyURL, {
-    headers: {
-      'X-Shopify-Access-Token': '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'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Handle the data and display it in the searchResults container
-    searchResults.innerHTML = ""; // Clear previous results
+	  // Replace 'your-shop.myshopify.com' with your Shopify store's URL and use your access token
+	  const shopifyURL = `https://my-vue-js-theme..myshopify.com/api/products?q=${query}`;
 
-    if (data.products.length === 0) {
-      searchResults.innerHTML = "No products found";
-    } else {
-      data.products.forEach(product => {
-        const productHTML = `
-          <div class="product">
-            <img src="${product.image_url}" alt="${product.title}">
-            <h3>${product.title}</h3>
-            <p>${product.price}</p>
-            <a href="${product.product_url}">View Details</a>
-          </div>
-        `;
-        searchResults.innerHTML += productHTML;
-      });
-    }
-  })
-  .catch(error => {
-    console.error("Error fetching data from Shopify:", error);
-  });
-}
+	  fetch(shopifyURL, {
+	    headers: {
+	      'X-Shopify-Access-Token': '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'
+	    }
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+		    // Handle the data and display it in the searchResults container
+		    searchResults.innerHTML = ""; // Clear previous results
 
+		    if (data.products.length === 0) {
+		      searchResults.innerHTML = "No products found";
+		    } else {
+		      data.products.forEach(product => {
+		        const productHTML = `
+		          <div class="product">
+		            <img src="${product.image_url}" alt="${product.title}">
+		            <h3>${product.title}</h3>
+		            <p>${product.price}</p>
+		            <a href="${product.product_url}">View Details</a>
+		          </div>
+		        `;
+		        searchResults.innerHTML += productHTML;
+		      });
+		    }
+		  })
+		  .catch(error => {
+		    console.error("Error fetching data from Shopify:", error);
+		  });
+		}
 
 </script>
