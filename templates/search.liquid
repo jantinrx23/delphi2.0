@@ -12,13 +12,18 @@
 		        </li>
 		      {% endfor %}
 		    </ul> {% endcomment %}
-			<input type="search" name="q" class="py-2.5 btn " value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
+				{% comment %} <input type="search" name="q" class="py-2.5 btn " value="{{ search.terms | escape }}" id="myInput" onfocus="showDropdown()">
 			  <div id="myDropdown" class="dropdown-container top-[100%] left-[0%]">
 				<a href="#" class="dropdown-option">Option 1</a>
 				<a href="#" class="dropdown-option">Option 2</a>
 				<a href="#" class="dropdown-option">Option 3</a>
-			  </div>
-			<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
+			  </div> {% endcomment %}
+
+			  	<input type="text" class="py-2.5 btn " id="myInput" oninput="searchShopifyProducts()">
+				<div id="myDropdown" class="dropdown-container">
+				  <div id="searchResults"></div>
+				</div>
+				<button type="submit" class="bg-[black] text-white px-5 py-3">Search</button>
 		</form>
 
 		  {% comment %} <div class="bg-red-400">	
@@ -116,17 +121,59 @@
 	});
 
 	function showDropdown() {
-  // Get the dropdown container element
-  var dropdown = document.getElementById("myDropdown");
+	  // Get the dropdown container element
+	  var dropdown = document.getElementById("myDropdown");
 
-  // Toggle the display of the dropdown on focus
-  dropdown.style.display = "block";
+	  // Toggle the display of the dropdown on focus
+	  dropdown.style.display = "block";
 
-  // Add a click event listener to the document
-  document.addEventListener('click', function(event) {
-    if (!event.target.matches('#myInput') && !event.target.matches('.dropdown-option')) {
-      dropdown.style.display = "none";
+	  // Add a click event listener to the document
+	  document.addEventListener('click', function(event) {
+	    if (!event.target.matches('#myInput') && !event.target.matches('.dropdown-option')) {
+	      dropdown.style.display = "none";
+	    }
+	 });
+	}
+
+
+	function searchShopifyProducts() {
+  const input = document.getElementById("myInput");
+  const searchResults = document.getElementById("searchResults");
+  const query = input.value;
+
+  // Replace 'your-shop.myshopify.com' with your Shopify store's URL and use your access token
+  const shopifyURL = 'https://my-vue-js-theme.myshopify.com/api/products?q=' + query;
+  
+  fetch(shopifyURL, {
+    headers: {
+      'X-Shopify-Access-Token': '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'
     }
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Handle the data and display it in the searchResults container
+    searchResults.innerHTML = ""; // Clear previous results
+
+    if (data.products.length === 0) {
+      searchResults.innerHTML = "No products found";
+    } else {
+      data.products.forEach(product => {
+        const productHTML = `
+          <div class="product">
+            <img src="${product.image_url}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p>${product.price}</p>
+            <a href="${product.product_url}">View Details</a>
+          </div>
+        `;
+        searchResults.innerHTML += productHTML;
+      });
+    }
+  })
+  .catch(error => {
+    console.error("Error fetching data from Shopify:", error);
   });
 }
+
+
 </script>
