@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
 <header class="header" id="header">
   <div class="header-inner flex space-between">
 
@@ -15,7 +17,8 @@
     {% endunless %}
 
     <a href="/" class="header-title">{{ shop.name }}</a>
-
+	{% render 'predictive-search', id: 'header-search' %}
+	
     <div class="cart-button-container" @click="toggleMiniCart">
       <button class="cart-button">
         <span>
