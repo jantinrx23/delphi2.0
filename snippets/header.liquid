@@ -17,7 +17,7 @@
     {% endunless %}
 
     <a href="/" class="header-title">{{ shop.name }}</a>
-	{% comment %} {% render 'predictive-search', id: 'header-search' %} {% endcomment %}
+	{% render 'predictive-search', id: 'header-search' %}
 
     <div class="cart-button-container" @click="toggleMiniCart">
       <button class="cart-button">
