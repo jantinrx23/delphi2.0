@@ -1,63 +1,31 @@
+// Add this code below your existing code
+
 class PredictiveSearch extends HTMLElement {
 	constructor() {
 	  super();
   
 	  this.input = this.querySelector('input[type="search"]');
-	  this.predictiveSearchResults = this.querySelector('#predictive-search');
+	  this.predictiveSearchResults = this.querySelector('#predictive-search-results');
   
 	  this.input.addEventListener('input', this.debounce((event) => {
 		this.onChange(event);
 	  }, 300).bind(this));
-	}
   
-	onChange() {
-	  const searchTerm = this.input.value.trim();
+	  // Add focus and blur event listeners to the input
+	  this.input.addEventListener('focus', () => {
+		this.open();
+	  });
   
-	  if (!searchTerm.length) {
+	  this.input.addEventListener('blur', () => {
 		this.close();
-		return;
-	  }
-  
-	  this.getSearchResults(searchTerm);
+	  });
 	}
   
-	getSearchResults(searchTerm) {
-	  fetch(`/search/suggest?q=${searchTerm}&section_id=predictive-search`)
-		.then((response) => {
-		  if (!response.ok) {
-			var error = new Error(response.status);
-			this.close();
-			throw error;
-		  }
+	// ... rest of your code
   
-		  return response.text();
-		})
-		.then((text) => {
-		  const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search').innerHTML;
-		  this.predictiveSearchResults.innerHTML = resultsMarkup;
-		  this.open();
-		})
-		.catch((error) => {
-		  this.close();
-		  throw error;
-		});
-	}
+	// Keep the rest of your code as it is
   
-	open() {
-	  this.predictiveSearchResults.style.display = 'block';
-	}
-  
-	close() {
-	  this.predictiveSearchResults.style.display = 'none';
-	}
-  
-	debounce(fn, wait) {
-	  let t;
-	  return (...args) => {
-		clearTimeout(t);
-		t = setTimeout(() => fn.apply(this, args), wait);
-	  };
-	}
+	// Add your custom functions and event listeners as described above
   }
   
   customElements.define('predictive-search', PredictiveSearch);
