@@ -1,32 +1,34 @@
-// Add this code below your existing code
-
-class PredictiveSearch extends HTMLElement {
-	constructor() {
-	  super();
+// Modify the getSearchResults method in your existing code
+getSearchResults(searchTerm) {
+	fetch(`/search/suggest?q=${searchTerm}&section_id=predictive-search`)
+	  .then((response) => {
+		if (!response.ok) {
+		  var error = new Error(response.status);
+		  this.close();
+		  throw error;
+		}
   
-	  this.input = this.querySelector('input[type="search"]');
-	  this.predictiveSearchResults = this.querySelector('#predictive-search-results');
+		return response.text();
+	  })
+	  .then((text) => {
+		const resultsMarkup = new DOMParser().parseFromString(text, 'text/html').querySelector('#shopify-section-predictive-search');
   
-	  this.input.addEventListener('input', this.debounce((event) => {
-		this.onChange(event);
-	  }, 300).bind(this));
-  
-	  // Add focus and blur event listeners to the input
-	  this.input.addEventListener('focus', () => {
+		if (resultsMarkup) {
+		  // Check if there are search results
+		  const products = resultsMarkup.querySelector('.predictive-search-products');
+		  if (products) {
+			this.predictiveSearchResults.innerHTML = resultsMarkup.innerHTML;
+		  } else {
+			this.predictiveSearchResults.innerHTML = 'No match';
+		  }
+		} else {
+		  this.predictiveSearchResults.innerHTML = 'No match';
+		}
 		this.open();
-	  });
-  
-	  this.input.addEventListener('blur', () => {
+	  })
+	  .catch((error) => {
 		this.close();
+		throw error;
 	  });
-	}
-  
-	// ... rest of your code
-  
-	// Keep the rest of your code as it is
-  
-	// Add your custom functions and event listeners as described above
   }
-  
-  customElements.define('predictive-search', PredictiveSearch);
   
