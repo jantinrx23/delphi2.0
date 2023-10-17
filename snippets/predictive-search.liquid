@@ -31,7 +31,8 @@
 {%- endif -%}
   <form class="search relative" role="search" action="{{ routes.search_url }}" method="get">
     <label class="label{% if hide_label %} visually-hidden{% endif %}" for="{{ id }}">
-      {{- 'general.search.input_label' | t -}}
+      {% comment %} {{- 'general.search.input_label' | t -}} {% endcomment %}
+	  here
     </label>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <search-form class="search__form block">
