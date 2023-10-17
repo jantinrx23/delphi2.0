@@ -14,7 +14,7 @@
     </a>
     {% endunless %}
 
-    <a href="/" class="header-title">{{ shop.name }}</a>
+    {% comment %} <a href="/" class="header-title">{{ shop.name }}</a> {% endcomment %}
 	{% render 'main-search'%}
 
     <div class="cart-button-container" @click="toggleMiniCart">
