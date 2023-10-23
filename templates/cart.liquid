@@ -8,7 +8,7 @@
 			<div class="text-center mx-auto">Prod</div>
 	        <div class="text-center mx-auto">Price</div>
 	        <div class="text-center mx-auto">Qty</div>
-	        <div class="text-center mx-auto">total</div>
+	        <div class="text-center mx-auto">Total</div>
 		</div>
       </thead>
       <tbody class="">
@@ -39,7 +39,8 @@
       </tbody>
     </table>
     <div class="flex justify-end items-center gap-7 mt-5 mx-[5vw]">
-      <p>sub total : {{ cart.total_price | money }}</p>
+	  <p class="text-3xl text-[#52BE80] font-bold">{{ product.metafields.custom.discount }}</p>
+      <p>Sub Total : {{ cart.total_price | money }}</p>
       <button type="submit" name="update" class="bg-[black] text-white px-5 py-3">Update</button>
       <button type="submit" name="checkout" class="bg-[black] text-white px-5 py-3">Checkout</button>
     </div>

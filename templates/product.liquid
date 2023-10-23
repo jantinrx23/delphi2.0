@@ -37,15 +37,15 @@
 		      {% render 'add-to-cart-form' %}
 		    </div>
 
-			<div class="bg-green-400">
+			{% comment %} <div class="bg-green-400">
 				{% for tag in product.tags %}
 					{% if tag contains 'discount300' %}
 					  {{ product.metafields.custom.discount }}
 					 {% else %}
-					   {% comment %} <p>dd</p>  {% endcomment %}
+					  
 					{% endif %}
 				  {% endfor %}
-			</div>
+			</div> {% endcomment %}
   		</div>
 
 </section>
