@@ -16,7 +16,7 @@
           <div class="grid grid-cols-4 bg-green-400 mt-12 mx-[5vw]">
             <div class="mx-auto flex flex-col items-center bg-blue-400">
               <a href="{{ item.url | within: collections.all }}">
-                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                <img class="w-[120px]" src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
 			    <div class="mx-auto text-center">
 	              <a href="{{ item.url }}">{{ item.product.title }}</a>
