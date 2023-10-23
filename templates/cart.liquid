@@ -3,11 +3,13 @@
   <h1 class="mb-22">CART</h1>
   <form action="/cart" method="post" novalidate>
     <table>
-      <thead class="grid grid-cols-4 w-full">
-        <div>Prod</div>
-        <div>Price</div>
-        <div>Qty</div>
-        <div>total</div>
+      <thead class="w-full">
+        <div class="grid grid-cols-4">
+			<div>Prod</div>
+	        <div>Price</div>
+	        <div>Qty</div>
+	        <div>total</div>
+		</div>
       </thead>
       <tbody>
         {% for item in cart.items %}
