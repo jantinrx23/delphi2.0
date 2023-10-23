@@ -25,11 +25,11 @@
 	            </div>
             </div>
             
-            <div class="mx-auto">{{ item.price | money }}</div>
-            <div class="mx-auto">
+            <div class="flex justify-center">{{ item.price | money }}</div>
+            <div class="flex justify-center">
               <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
             </div>
-            <div class="mx-auto">
+            <div class="flex justify-center">
               {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
               {{ item.line_price | money }}
               {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
