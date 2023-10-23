@@ -2,7 +2,7 @@
   {% if cart.item_count > 0 %}
   <h1 class="mb-[10vh] text-2xl">CART</h1>
   <form action="/cart" method="post" novalidate>
-    <table>
+    <table class="flex flex-col gap-10">
       <thead class="w-full">
         <div class="grid grid-cols-4">
 			<div class="text-center mx-auto">Prod</div>
