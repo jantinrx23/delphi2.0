@@ -1,6 +1,6 @@
 <div class="cart-form flex flex-col h-[100vh] justify-center items-center py-7 gap-10px">
   {% if cart.item_count > 0 %}
-  <h1 class="mb-[10vh]">CART</h1>
+  <h1 class="mb-[10vh] text-2xl">CART</h1>
   <form action="/cart" method="post" novalidate>
     <table>
       <thead class="w-full">
@@ -13,27 +13,27 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="flex justify-center items-center gap-7 ">
-            <td>
+          <div class="grid grid-cols-4">
+            <div class="mx-auto">
               <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
-            </td>
-            <td>
+            </div>
+            <div class="mx-auto">
               <a href="{{ item.url }}">{{ item.product.title }}</a>
               {{ item.variant.title }}
               <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-            </td>
-            <td>{{ item.price | money }}</td>
-            <td>
+            </div>
+            <div class="mx-auto">{{ item.price | money }}</div>
+            <div class="mx-auto">
               <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-            </td>
-            <td>
+            </div>
+            <div class="mx-auto">
               {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
               {{ item.line_price | money }}
               {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-            </td>
-          </tr>
+            </div>
+          </div>
         {% endfor %}
       </tbody>
     </table>
