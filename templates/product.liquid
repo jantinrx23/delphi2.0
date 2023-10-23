@@ -60,15 +60,17 @@
 		      {% render 'add-to-cart-form' %}
 		    </div>
 
-  		</div>
+			<div class="bg-red-400">
+				{% for tag in product.tags %}
+					{% if tag contains 'test' %}
+					  dsds
+					 {% else %}
+					   <p>dd</p> 
+					{% endif %}
+				  {% endfor %}
+			</div>
 
-             {% for tag in product.tags %}
-				{% if tag contains 'test' %}
-				  dsds
-				 {% else %}
-				   <p>dd</p> 
-				{% endif %}
-			  {% endfor %}
+  		</div>
 
 
 </section>
