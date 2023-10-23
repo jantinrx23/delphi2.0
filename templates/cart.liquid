@@ -1,17 +1,17 @@
 <div class="cart-form flex flex-col h-[100vh] justify-center items-center py-7 gap-10px">
   {% if cart.item_count > 0 %}
-  <h1 class="text-3xl">CART</h1>
-  <form  class="mt-[10vh]" action="/cart" method="post" novalidate>
-    <table class="bg-red-400">
+  <h1 class="mb-22">CART</h1>
+  <form action="/cart" method="post" novalidate>
+    <table>
       <thead class="grid grid-cols-4">
-        <th>Product</th>
+        <th >Prod</th>
         <th>Price</th>
         <th>Qty</th>
         <th>total</th>
       </thead>
-      <tbody class="bg-green-400">
+      <tbody>
         {% for item in cart.items %}
-          <tr class="grid grid-cols-4">
+          <tr class="flex justify-center items-center gap-7 ">
             <td>
               <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
