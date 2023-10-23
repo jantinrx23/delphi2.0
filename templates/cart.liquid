@@ -38,12 +38,18 @@
         {% endfor %}
       </tbody>
     </table>
-    <div class="flex justify-end items-center gap-7 mt-5 mx-[5vw]">
-	  <p class="text-3xl text-[#52BE80] font-bold">{{ product.metafields.custom.discount }} dsds</p>
-      <p>Sub Total : {{ cart.total_price | money }}</p>
-      {% comment %} <button type="submit" name="update" class="bg-[black] text-white px-5 py-3">Update</button> {% endcomment %}
-      {% comment %} <button type="submit" name="checkout" class="bg-[black] text-white px-5 py-3">Checkout</button> {% endcomment %}
-    </div>
+	    <div class="flex justify-end items-center gap-7 mt-5 mx-[5vw]">
+			{% for tag in product.tags %}
+				{% if tag contains 'discount300' %}
+					<p class="text-3xl text-[#52BE80] font-bold">{{ product.metafields.custom.discount }} </p>
+				 {% else %}
+				{% endif %}
+			{% endfor %}
+				
+		      <p>Sub Total : {{ cart.total_price | money }}</p>
+		      <button type="submit" name="update" class="bg-[black] text-white px-5 py-3">Update</button>
+		      <button type="submit" name="checkout" class="bg-[black] text-white px-5 py-3">Checkout</button>
+	    </div>
   </form>
 {% else %}
   <h2>cart</h2>
