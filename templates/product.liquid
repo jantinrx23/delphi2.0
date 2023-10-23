@@ -70,7 +70,18 @@
 				  {% endfor %}
 			</div>
 
+<<<<<<< HEAD
   		</div>
+=======
+             {% for tag in product.tags %}
+				{% if tag contains 'discount300' %}
+				  dsds
+				 {% else %}
+				   <p>dd</p> 
+				{% endif %}
+			  {% endfor %}
+           {{ product.metafields.custom.discount }}
+>>>>>>> a369ce736dbe07043661dd67e830f03d1638418c
 
 
 </section>
