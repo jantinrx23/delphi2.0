@@ -3,15 +3,15 @@
   <h1 class="text-3xl">CART</h1>
   <form  class="mt-[10vh]" action="/cart" method="post" novalidate>
     <table>
-      <thead>
-        {% comment %} <th colspan="2">Prod</th> {% endcomment %}
+      <thead class="grid grid-cols-4">
+        <th>Product</th>
         <th>Price</th>
         <th>Qty</th>
         <th>total</th>
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="flex justify-center items-center gap-7 ">
+          <tr class="grid grid-cols-4">
             <td>
               <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
