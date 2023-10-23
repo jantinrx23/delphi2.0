@@ -2,14 +2,14 @@
   {% if cart.item_count > 0 %}
   <h1 class="text-3xl">CART</h1>
   <form  class="mt-[10vh]" action="/cart" method="post" novalidate>
-    <table>
+    <table class="bg-red-400">
       <thead class="grid grid-cols-4">
         <th>Product</th>
         <th>Price</th>
         <th>Qty</th>
         <th>total</th>
       </thead>
-      <tbody>
+      <tbody class="bg-green-400">
         {% for item in cart.items %}
           <tr class="grid grid-cols-4">
             <td>
