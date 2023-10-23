@@ -18,12 +18,13 @@
               <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
+			  <div class="mx-auto">
+	              <a href="{{ item.url }}">{{ item.product.title }}</a>
+	              {{ item.variant.title }}
+	              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+	            </div>
             </div>
-            <div class="mx-auto">
-              <a href="{{ item.url }}">{{ item.product.title }}</a>
-              {{ item.variant.title }}
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-            </div>
+            
             <div class="mx-auto">{{ item.price | money }}</div>
             <div class="mx-auto">
               <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
