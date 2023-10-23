@@ -13,8 +13,8 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <div class="grid grid-cols-4">
-            <div class="mx-auto">
+          <div class="grid grid-cols-4 bg-red-400">
+            <div class="mx-auto bg-green-400">
               <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
