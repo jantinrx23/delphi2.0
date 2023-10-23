@@ -39,10 +39,10 @@
 
 			<div class="bg-red-400">
 				{% for tag in product.tags %}
-					{% if tag contains 'test' %}
-					  dsds
+					{% if tag contains 'discount300' %}
+					  {{ product.metafields.custom.discount }}
 					 {% else %}
-					   <p>dd</p> 
+					   {% comment %} <p>dd</p>  {% endcomment %}
 					{% endif %}
 				  {% endfor %}
 			</div>
