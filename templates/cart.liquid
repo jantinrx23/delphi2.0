@@ -36,16 +36,7 @@
       </tbody>
     </table>
 
-	<div class="bg-green-400">
-				  {% for tag in product.tags %}
-					{% if tag contains 'discount300' %}
-					  {{ product.metafields.custom.discount }}
-					 {% else %}
-					  
-					{% endif %}
-				  {% endfor %}
-				  sdsdsd
-			    </div> 
+	{% render 'discount' %}
 
 
     <div class="flex justify-end items-center gap-7 mt-5">
